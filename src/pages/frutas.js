@@ -15,7 +15,7 @@ function Frutas() {
 
   const reloadFrutas= () => {
     console.log('relaoding frutas....')
-    fetch("/api/frutas")
+    fetch("https://nubitaserver.vercel.app/api/frutas")
       .then((res) => res.json())
       .then((data) => setFrutas(data));
   }
