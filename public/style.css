@@ -1,0 +1,45 @@
+/*.myPanel {
+border-style: solid;
+border-color: darkgrey;
+border-radius: 5px;
+border-width: 1px;
+}
+
+.form-check {
+    padding-left: 50px;
+}
+*/
+.cardView {
+/*  background-color: #f5f5f5; */
+box-shadow: 1px 1px 1px #888;
+
+}
+
+.bi-trash:hover {
+  color: red;
+  cursor: pointer;
+}
+
+.bi-pencil:hover {
+  color: #7280CF;
+  cursor: pointer;
+}
+
+.bi-calculator:hover {
+  color: green;
+  cursor: pointer;
+}
+
+
+/*remove arrows from input type number*/
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
