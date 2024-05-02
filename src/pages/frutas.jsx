@@ -20,15 +20,14 @@ function Frutas() {
       .then((data) => setFrutas(data));
   }
 
- 
-  const editFruta = (event, data) => { 
+   const editFruta = (event, data) => { 
     console.log('editando desde Frutas; func = editFruta', data)
     setFormularioData(data);
   }
 
   return (
     <section className="bg-grey-50 padding-top-60 padding-top-sm-30 mt-2">
-      <div className="container" style={{marginLeft: "200px"}}>
+      <div className="container">
         <div className="row myPanel chula">
           <div className="col-md-6 col-sm-4 hidden-xs">
             <TablaFrutas

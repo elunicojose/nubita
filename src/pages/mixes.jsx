@@ -24,7 +24,7 @@ function Mixes() {
  
   return (
     <section className="bg-grey-50 padding-top-60 padding-top-sm-30">
-      <div className="container" style={{marginLeft: "200px"}}>
+      <div className="container">
       
         <div className="row myPanel p-2">
           <FormMix frutas={frutas} />
