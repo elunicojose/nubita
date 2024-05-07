@@ -57,7 +57,7 @@ const  TablaFrutas = (props) => {
                     <td>{fruta.flete}</td>
                     <td>{fruta.total}</td>
                     <td>
-                      <Button
+                      <Button size="sm"
                         className="btn btn-warning"
                         onClick={(event) => props.editFruta(event, {id: fruta.idfrutas, descFruta: fruta.nombre, 
                           costoFruta: fruta.costo, costoFlete: fruta.flete, selectedFruta: fruta.idfrutas })}
@@ -65,7 +65,7 @@ const  TablaFrutas = (props) => {
                         <i className="bi bi-pencil"></i>
                       </Button>
 
-                      <Button
+                      <Button size="sm"
                         style={{ marginLeft: "10px" }}
                         className="btn btn-danger"
                         onClick={() => removeFruta(fruta.idfrutas)}
