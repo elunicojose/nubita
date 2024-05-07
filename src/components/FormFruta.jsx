@@ -1,17 +1,17 @@
-import React, { useEffect } from "react";
-import { useState, useRef } from "react";
+import React, { useEffect, useState, useRef} from "react";
 import Button from "react-bootstrap/Button";
 import "bootstrap/dist/css/bootstrap.min.css";
-import axios from "axios";
+import axios, { HttpStatusCode } from "axios";
 
 function FormFruta(props) {
+  const API_ADD_FRUTA = process.env.REACT_APP_API_ADD_FRUTA;  
   const descFruta = useRef("");
   const costoFruta = useRef("");
   const costoFlete = useRef("");
 
   useEffect(() => {
    
-    console.log('en useEffect de FromFruta. props= ', props)
+    console.log('en useEffect de FormFruta. props= ', props)
     console.log('cambió formularioData?', props.formularioData)
     console.log('props.selectedFruta= ', props.selectedFruta)
     console.log('props.formularioData.selectedFruta= ', props.formularioData.selectedFruta)
@@ -23,7 +23,7 @@ function FormFruta(props) {
   }, [props.formularioData]);
     
 
-  const URL = "http://localhost:3001/api/addFruta";
+  const URL = API_ADD_FRUTA;
   const [formData, setFormData] = useState({
     nombre: "",
     costo: "0",
@@ -42,19 +42,33 @@ function FormFruta(props) {
     e.preventDefault();
     console.log("enviando...", formData);
     console.log('costoFruta.current.value', costoFruta.current.value);
-    console.log('costoFruta.current', costoFruta.current);
+
+    const frutaInfo = {
+      id: props.formularioData.selectedFruta,
+      nombre: props.formularioData.selectedFruta == null ? formData.nombre : descFruta.current.value,
+      costo: props.formularioData.selectedFruta == null ? formData.costo : costoFruta.current.value,
+      flete: props.formularioData.selectedFruta == null ? formData.flete : costoFlete.current.value,
+      action: props.formularioData.selectedFruta == null ? "ADD" : "EDIT",
+    };
+
+    console.log('frutaInfo= ' + frutaInfo.action)
     axios
-      .post(URL, {
-        nombre: props.formularioData.selectedFruta == null ? formData.nombre : descFruta.current.value,
-        costo: props.formularioData.selectedFruta == null ? formData.costo : costoFruta.current.value,
-        flete: props.formularioData.selectedFruta == null ? formData.flete : costoFlete.current.value,
-        action: props.formularioData.selectedFruta == null ? "ADD" : "EDIT",
-      })
+      .post(URL, frutaInfo)
       .then((res) => {
         console.log("enviado: ", res.data);
-        props.reloadData(); //llamando a reload de App
-        props.showAlert("Nueva fruta agregada", "success");
-        clearFormFields();
+        if (res.status === HttpStatusCode.Ok) {
+          if (frutaInfo.action === 'ADD') {
+           props.showAlert("Nueva fruta agregada", "success");
+          }
+          else if (frutaInfo.action === 'EDIT') {
+           props.showAlert("Fruta modificada", "success");
+          } 
+          
+          props.reloadData(); //llamando a reload de App
+          console.log('Response status= ' + res.status)
+          clearFormFields();
+        }
+        
       })
       .catch((err) => {
         console.log("Error al procesar fruta.", err);

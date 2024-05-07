@@ -3,24 +3,34 @@ import { useEffect, useState } from "react";
 import FormMix from "../components/FormMix";
 import CardsMixes from "../components/CardsMixes";
 
+
 function Mixes() {
+  const API_FRUTAS = process.env.REACT_APP_API_FRUTAS;  
+  const API_MIXES = process.env.REACT_APP_API_MIXES;  
 
   const [frutas, setFrutas] = useState([]);
   const [mixes, setMixes] = useState([]);
+  
   useEffect(() => {
-    reloadFrutas();
+    //reloadFrutas();
+    console.log('relaoding frutas....')
+    fetch(API_FRUTAS)
+    .then((res) => res.json())
+    .then((data) => setFrutas(data));
 
-    fetch("/mixes")
+    
+    console.log('relaoding mixes....')
+    fetch(API_MIXES)
       .then((res) => res.json())
       .then((data) => setMixes(data));
   }, []);
 
-  const reloadFrutas= () => {
+  /*const reloadFrutas= () => {
     console.log('relaoding frutas....')
-    fetch("/frutas")
+    fetch(API_FRUTAS)
       .then((res) => res.json())
       .then((data) => setFrutas(data));
-  }
+  }*/
  
   return (
     <section className="bg-grey-50 padding-top-60 padding-top-sm-30">

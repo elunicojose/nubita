@@ -2,7 +2,7 @@ import React from "react";
 
 function CardsMixes({mixes}) {
 
-    console.log('MIXES= ', mixes)
+  console.log('MIXES= ', mixes)
   const prepararMixParaEdicion = (event, param) => {}
   const calcularGanancia = (event, param) => {}
   const removeMix = (event, param) => {}
@@ -25,7 +25,7 @@ function CardsMixes({mixes}) {
                 <span style={{paddingRight: "10px"}}>{frutaMix.nombre}</span>
                 <span>{frutaMix.gramos} gr</span>
                 <span style={{float: "right"}}>${frutaMix.costo}</span>
-              </div>
+               </div>
                     ))
                 }
 

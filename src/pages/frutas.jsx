@@ -5,6 +5,7 @@ import FormFruta from "../components/FormFruta";
 import { showAlert } from "../utils/Commons";
 
 function Frutas() {
+  const API_GET_FRUTAS = process.env.REACT_APP_API_GET_FRUTAS;  
   const [frutas, setFrutas] = useState([]);
 
   const [formularioData, setFormularioData] = useState({id: "", descFruta : "", costoFruta : "", costoFlete : "", selectedFruta: null }) 
@@ -15,7 +16,7 @@ function Frutas() {
 
   const reloadFrutas= () => {
     console.log('relaoding frutas....')
-    fetch("https://nubitaserver.vercel.app/api/frutas")
+    fetch(API_GET_FRUTAS)
       .then((res) => res.json())
       .then((data) => setFrutas(data));
   }
@@ -38,7 +39,7 @@ function Frutas() {
           </div>
           <div
             className="col-md-6 col-sm-4 hidden-xs"
-            style={{ paddingBottom: "10px" }}
+            style={{paddingBottom:"10px"}}
           >
             <FormFruta
               reloadData={() => reloadFrutas()}
@@ -46,7 +47,7 @@ function Frutas() {
               editFruta={editFruta}
               formularioData = {formularioData}
               setFormularioData = {setFormularioData}
-              selectedFruta = {formularioData != null ? formularioData.id : null }
+              selectedFruta = {formularioData != null ? formularioData.id : null}
             />
           </div>
         </div>
