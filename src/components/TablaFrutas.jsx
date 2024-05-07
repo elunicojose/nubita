@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import axios, { HttpStatusCode } from "axios";
 import '../css/tablafrutas.css'
 import { showAlert } from "../utils/Commons";
+import Table from 'react-bootstrap/Table';
 
 const  TablaFrutas = (props) => {  
   console.log('TablaFrutas props: ', props)
@@ -32,10 +33,9 @@ const  TablaFrutas = (props) => {
           Frutas
         </div>
         <div className="panel-body">
-          <table
+          <Table
             id="tblFrutas"
-            className="table table-striped"
-            style={{ width: "100%" }}
+            striped hover size="sm"
           >
             <thead>
               <tr>
@@ -76,7 +76,7 @@ const  TablaFrutas = (props) => {
                   </tr>
                 ))}
             </tbody>
-          </table>
+          </Table>
         </div>
       </div>
     </div>
