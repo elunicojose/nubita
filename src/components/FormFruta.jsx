@@ -94,7 +94,7 @@ function FormFruta(props) {
         </div>
         <div className="panel-body">
           <form id="formulario" onSubmit={handleSubmit}>
-            <div className="row mb-3" style={{ paddingTop: "50px" }}>
+            <div className="row mb-3" style={{ paddingTop: "10px" }}>
               <label htmlFor="descFruta" className="col-sm-2 col-form-label">
                 Fruta
               </label>

@@ -26,12 +26,7 @@ const  TablaFrutas = (props) => {
   return (
     <div className="widget">
       <div className="panel panel-default">
-        <div
-          className="panel-heading"
-          style={{ backgroundColor: "#7280CF", fontWeight: "bold" }}
-        >
-          Frutas
-        </div>
+        
         <div className="panel-body">
           <Table
             id="tblFrutas"

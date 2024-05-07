@@ -30,7 +30,7 @@ function Frutas() {
     <section className="bg-grey-50 padding-top-60 padding-top-sm-30 mt-2">
       <div className="container">
         <div className="row myPanel chula">
-          <div className="col-md-6 col-sm-4 hidden-xs">
+          <div className="col-md-6 col-sm-12 hidden-xs">
             <TablaFrutas
               frutas={frutas}
               reloadData={() => reloadFrutas()}
@@ -38,7 +38,7 @@ function Frutas() {
             />
           </div>
           <div
-            className="col-md-6 col-sm-4 hidden-xs"
+            className="col-md-6 col-sm-12 hidden-xs"
             style={{paddingBottom:"10px"}}
           >
             <FormFruta
