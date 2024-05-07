@@ -43,7 +43,6 @@ const  TablaFrutas = (props) => {
                 <th scope="col">Costo</th>
                 <th scope="col">Flete</th>
                 <th scope="col">Total</th>
-                <th scope="col">Acciones</th>
               </tr>
             </thead>
             <tbody id="data-output">
@@ -66,7 +65,7 @@ const  TablaFrutas = (props) => {
                       </Button>
 
                       <Button size="sm"
-                        style={{ marginLeft: "10px" }}
+                        style={{ marginLeft: "5px" }}
                         className="btn btn-danger"
                         onClick={() => removeFruta(fruta.idfrutas)}
                       >
