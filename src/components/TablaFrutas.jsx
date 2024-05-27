@@ -12,7 +12,7 @@ const  TablaFrutas = (props) => {
   const removeFruta = (idFruta) => {
     console.log(idFruta);
     axios
-      .delete(API_DELETE_FRUTA,  {data: {id: idFruta}})
+      .delete(API_DELETE_FRUTA+ `/${idFruta}`)
       .then((res) => {
         console.log('resultado borrado= ', res)
         if (res.status === HttpStatusCode.Ok) {
