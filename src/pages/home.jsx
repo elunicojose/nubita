@@ -1,8 +1,11 @@
 import React from 'react'
+import FormularioResponsive from '../pruebas/FormularioResponsive'
 
 function Home() {
   return (
-    <div>Home</div>
+    <div>
+      <FormularioResponsive/>
+    </div>
   )
 }
 

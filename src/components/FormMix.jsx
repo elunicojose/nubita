@@ -1,6 +1,14 @@
 import React from "react";
+//import FrutasForMixes from "./FrutasForMixes";
+import { useEffect} from "react";
+import FrutasForMixes from "./FrutasForMixes";
 
 function MyMixes({frutas}) {
+
+  useEffect(() => {
+    console.log("en FormMix frutas= " + frutas);
+    
+  }, []);
 
     const crearOActualizarMix = () => {}
     const resetMix = () => {}
@@ -29,20 +37,8 @@ function MyMixes({frutas}) {
             </label>
           </div>
           <br />
-          <div id="gestorMixes" className="d-flex flex-row">
-            { frutas && frutas.length && frutas.map((fruta) => (
-               <div className="form-check" key={fruta.id}>
-               <input className="form-check-input" type="checkbox" id={"flexCheckDefault-" + fruta.id} style={{marginLeft: "0"}}/>
-               <label className="form-check-label" style={{paddingLeft: "5px"}} htmlFor={"flexCheckDefault-" + fruta.id}>{fruta.nombre}</label>
-               <div className="row mb-3">
-                 <div className="col-sm-10">
-                 <input type="number" defaultValue = "0" className="form-control" id={"cantGramos-" + fruta.id} style={{textAlign: "right", marginTop: "10px"}}/>
-                 </div>
-               </div>
-             </div>
-            ))}
 
-          </div>
+          <FrutasForMixes frutas={frutas}/>
 
           <div className="d-flex justify-content-end gap-3">
             <button

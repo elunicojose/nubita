@@ -14,8 +14,8 @@ function CardsMixes({mixes}) {
             <div className="col-md-3 p-2" key={mix.idMix} >
             <div className="card carView">
               <div className="card-header" style={{backgroundColor: "#f5f5f5"}}>
-                 <span><h6 className="card-title">{mix.nombreMix}</h6></span><span style={{float: "right"}}><i onClick={event => prepararMixParaEdicion(event, mix.idMix)} 
-                 className="bi bi-pencil" style={{paddingRight: "10px"}}></i><i onClick={event => removeMix(event, mix.idMix)} className="bi bi-trash"></i></span>
+                 <span><h6 className="card-title">{mix.nombreMix}</h6></span><span style={{float: "right"}}><i onClick={event => prepararMixParaEdicion(event, mix.idmix)} 
+                 className="bi bi-pencil" style={{paddingRight: "10px"}}></i><i onClick={event => removeMix(event, mix.idmix)} className="bi bi-trash"></i></span>
               </div>
               <div className="card-body">
                 {
