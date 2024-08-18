@@ -11,51 +11,55 @@ function Mixes() {
   const [mixes, setMixes] = useState([]);
 
   useEffect(() => {
-    //reloadFrutas();
+    reloadFrutas();
+    reloadMixes();
+  }, []);
+
+  const reloadFrutas= () => {
     console.log("relaoding frutas....");
     fetch(API_FRUTAS)
       .then((res) => res.json())
       .then((data) => setFrutas(data));
+  }
 
+  const reloadMixes= () => {
     console.log("relaoding mixes....");
     fetch(API_MIXES)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok ' + response.statusText);
-      }
-      const contentType = response.headers.get('content-type');
-      if (!contentType || !contentType.includes('application/json')) {
-        throw new Error('Expected JSON response from server, but received ' + contentType);
-      }
-      return response.json();
-    })
-    .then(data => {
-      setMixes(data)
-    })
-    .catch(error => {
-      console.error('Error fetching data:', error);
-    });
-      /*.then((res) => res.json())
-      .then((data) => setMixes(data));*/
-  }, []);
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok " + response.statusText);
+        }
+        const contentType = response.headers.get("content-type");
+        if (!contentType || !contentType.includes("application/json")) {
+          throw new Error(
+            "Expected JSON response from server, but received " + contentType
+          );
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setMixes(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }
 
-  /*const reloadFrutas= () => {
-    console.log('relaoding frutas....')
-    fetch(API_FRUTAS)
-      .then((res) => res.json())
-      .then((data) => setFrutas(data));
-  }*/
 
   return (
     <section className="bg-grey-50 padding-top-60 padding-top-sm-30">
       <div className="container">
-        <div className="row myPanel p-2">
-          <FormMix frutas={frutas} />
-        </div>
-        <div className="row myPanel p-2">
-          <h5 className="card-title">Mixes</h5>
-          <div id="containerMix" className="row">
-            <CardsMixes mixes={mixes} />
+        <div className="row myPanel espacioAlert">
+          <div className="row myPanel p-2">
+            <FormMix 
+            frutas={frutas}
+            onMixCreated = {reloadMixes} />
+          </div>
+          <div className="row myPanel p-2">
+            <h5 className="card-title">Mixes</h5>
+            <div id="containerMix" className="row">
+              <CardsMixes mixes={mixes} />
+            </div>
           </div>
         </div>
       </div>
