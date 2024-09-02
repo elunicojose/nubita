@@ -1,10 +1,28 @@
 import React from "react";
+import axios, { HttpStatusCode } from "axios";
+import { showAlertMixes } from "../utils/Commons";
 
 function CardsMixes({ mixes }) {
   console.log("MIXES= ", mixes);
+  
+  const API_DELETE_MIX = process.env.REACT_APP_API_DELETE_MIX
   const prepararMixParaEdicion = (event, param) => {};
   const calcularGanancia = (event, param) => {};
-  const removeMix = (event, param) => {};
+  
+  const removeMix = (event, idMix) => {
+    console.log('borrando mix= ', idMix);
+    axios
+      .delete(API_DELETE_MIX + `/${idMix}`)
+      .then((res) => {
+        console.log('resultado borrado= ', res)
+        if (res.status === HttpStatusCode.Ok) {
+          console.log('status code=> ', res.status)
+          showAlertMixes("Mix borrado", "success");   
+        }
+        //props.reloadData()
+      })
+      .catch((error) => console.error(error));
+  };
 
   return (
     <>
@@ -15,12 +33,11 @@ function CardsMixes({ mixes }) {
             <div className="card carView">
               <div
                 className="card-header"
-                style={{ backgroundColor: "#f5f5f5" }}
-              >
+                style={{ backgroundColor: "#f5f5f5" }}>
                 <span>
                   <h6 className="card-title">{mix.nombreMix}</h6>
                 </span>
-                <span style={{ float: "right" }}>
+                <span style={{ float: "left" }}>
                   <i
                     onClick={(event) =>
                       prepararMixParaEdicion(event, mix.idMix)
@@ -28,6 +45,8 @@ function CardsMixes({ mixes }) {
                     className="bi bi-pencil"
                     style={{ paddingRight: "10px" }}
                   ></i>
+                </span>                   
+                <span style={{ float: "right" }}>
                   <i
                     onClick={(event) => removeMix(event, mix.idMix)}
                     className="bi bi-trash"

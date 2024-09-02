@@ -53,7 +53,7 @@ function Mixes() {
           <div className="row myPanel p-2">
             <FormMix 
             frutas={frutas}
-            onMixCreated = {reloadMixes} />
+            reloadMixesList = {reloadMixes} />
           </div>
           <div className="row myPanel p-2">
             <h5 className="card-title">Mixes</h5>

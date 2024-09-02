@@ -4,7 +4,6 @@ import FormularioResponsive from '../pruebas/FormularioResponsive'
 function Home() {
   return (
     <div>
-      <FormularioResponsive/>
     </div>
   )
 }

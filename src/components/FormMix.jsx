@@ -3,7 +3,9 @@ import { useEffect, useState, useRef } from "react";
 import FrutasForMixes from "./FrutasForMixes";
 import { showAlertMixes } from "../utils/Commons";
 
-function MyMixes({ frutas, onMixCreated }) {
+/*const  TablaFrutas = (props) => { */
+
+const MyMixes = (props) => {
   const childRef = useRef();
 
   const cleanMixFrutas = () => {
@@ -14,7 +16,7 @@ function MyMixes({ frutas, onMixCreated }) {
 
   const API_ADD_MIX = process.env.REACT_APP_API_ADD_MIX;
   useEffect(() => {
-    console.log("en FormMix frutas= " + frutas);
+    console.log("en FormMix frutas= " + props.frutas);
   }, []);
 
   const [nombreMix, setNombreMix] = useState("");
@@ -65,7 +67,7 @@ function MyMixes({ frutas, onMixCreated }) {
 
       if (response.ok) {
         console.log('Mix de frutas agregado exitosamente');
-        onMixCreated();
+        props.reloadMixesList();
       } else {
         console.error('Error al agregar el mix de frutas');
       }
@@ -137,7 +139,7 @@ function MyMixes({ frutas, onMixCreated }) {
         <br />
 
         <FrutasForMixes
-          frutas={frutas}
+          frutas={props.frutas}
           onCheckboxChange={handleCheckboxChange}
           onInputChange={handleInputChange}
           ref={childRef}
