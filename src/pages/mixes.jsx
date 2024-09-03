@@ -58,7 +58,10 @@ function Mixes() {
           <div className="row myPanel p-2">
             <h5 className="card-title">Mixes</h5>
             <div id="containerMix" className="row">
-              <CardsMixes mixes={mixes} />
+              <CardsMixes 
+              mixes={mixes}
+              reloadMixesList = {reloadMixes}
+               />
             </div>
           </div>
         </div>

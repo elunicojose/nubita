@@ -2,8 +2,8 @@ import React from "react";
 import axios, { HttpStatusCode } from "axios";
 import { showAlertMixes } from "../utils/Commons";
 
-function CardsMixes({ mixes }) {
-  console.log("MIXES= ", mixes);
+const CardsMixes =( props) => {
+  console.log("props.MIXES= ", props.mixes);
   
   const API_DELETE_MIX = process.env.REACT_APP_API_DELETE_MIX
   const prepararMixParaEdicion = (event, param) => {};
@@ -18,17 +18,18 @@ function CardsMixes({ mixes }) {
         if (res.status === HttpStatusCode.Ok) {
           console.log('status code=> ', res.status)
           showAlertMixes("Mix borrado", "success");   
+          props.reloadMixesList()
         }
-        //props.reloadData()
+        
       })
       .catch((error) => console.error(error));
   };
 
   return (
     <>
-      {mixes &&
-        mixes.length &&
-        mixes.map((mix) => (
+      {props.mixes &&
+        props.mixes.length &&
+        props.mixes.map((mix) => (
           <div className="col-md-3 p-2" key={mix.idMix}>
             <div className="card carView">
               <div
