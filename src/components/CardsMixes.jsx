@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import axios, { HttpStatusCode } from "axios";
 import { showAlertMixes } from "../utils/Commons";
 
@@ -6,10 +6,49 @@ const CardsMixes =( props) => {
   console.log("props.MIXES= ", props.mixes);
   
   const API_DELETE_MIX = process.env.REACT_APP_API_DELETE_MIX
+  const API_UPDATE_GANANCIA_MIX = process.env.REACT_APP_API_UPDATE_GANANCIA_MIX
+
+  const [ganancias, setGanancias] = useState({});
+
   const prepararMixParaEdicion = (event, param) => {};
-  const calcularGanancia = (event, param) => {};
+
+  const calcularGanancia = async (idMix) => {
+   console.log('idMix= ', idMix)
+   console.log('ganancia= ', ganancias[idMix])
+   if (ganancias[idMix]) { //solo actualizar total con ganancia solo si se moficó el valor del %
+    const body = {
+      id: idMix,
+      pct: ganancias[idMix]
+    };
+
+console.log(API_UPDATE_GANANCIA_MIX)
+console.log(process.env.REACT_APP_API_UPDATE_GANANCIA_MIX)
+
+    try {
+      const response = await axios.post(API_UPDATE_GANANCIA_MIX, body, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      console.log('Respuesta del servidor:', response.data);
+      if (response.status == HttpStatusCode.Ok) {
+        props.reloadMixesList()
+      }
+
+    } catch (error) {
+      console.error('Error:', error);
+    }  
+   }
+  };
+
+  const handleChangeGanancia = (idMix, e) => {
+    setGanancias({
+      ...ganancias,
+      [idMix]: e.target.value
+    });
+  };
   
-  const removeMix = (event, idMix) => {
+  const removeMix = (idMix) => {
     console.log('borrando mix= ', idMix);
     axios
       .delete(API_DELETE_MIX + `/${idMix}`)
@@ -49,7 +88,7 @@ const CardsMixes =( props) => {
                 </span>                   
                 <span style={{ float: "right" }}>
                   <i
-                    onClick={(event) => removeMix(event, mix.idMix)}
+                    onClick={() => removeMix(mix.idMix)}
                     className="bi bi-trash"
                   ></i>
                 </span>
@@ -73,9 +112,9 @@ const CardsMixes =( props) => {
                 ${mix.totalMix}
               </div>
               <div className="card-footer">
-                <div className="input-group mb-4" style={{ columnGap: "5px" }}>
+                <div key = {mix.idMix} className="input-group mb-4" style={{ columnGap: "5px" }}>
                   <label
-                    htmlFor="exampleFormControlInput1"
+                    htmlFor={"inputPct-" + mix.idMix}
                     className="form-label"
                     style={{ paddingTop: "5px", paddingRight: "5px" }}
                   >
@@ -85,6 +124,7 @@ const CardsMixes =( props) => {
                     id={"inputPct-" + mix.idMix}
                     defaultValue={mix.pct ? mix.pct : 0}
                     type="number"
+                    onChange={(e) => handleChangeGanancia(mix.idMix, e)} 
                     className="form-control"
                     style={{
                       textAlign: "end",
@@ -92,8 +132,8 @@ const CardsMixes =( props) => {
                     }}
                   />
                   <i
-                    onClick={(event) =>
-                      calcularGanancia(event, mix.idMix, mix.totalMix)
+                    onClick={() =>
+                      calcularGanancia(mix.idMix)
                     }
                     className="bi bi-calculator"
                     style={{ paddingTop: "5px" }}
