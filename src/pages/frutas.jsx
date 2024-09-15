@@ -8,7 +8,9 @@ function Frutas() {
   const API_GET_FRUTAS = process.env.REACT_APP_API_GET_FRUTAS;  
   const [frutas, setFrutas] = useState([]);
 
-  const [formularioData, setFormularioData] = useState({id: "", descFruta : "", costoFruta : "", costoFlete : "", selectedFruta: null }) 
+  const [formularioData, setFormularioData] = useState({id: "", descFruta : "", costoFruta : "",
+     costoFlete : "", costoBolsa : "", costoEtiquetas : "", costoCaja : "", costoCinta : "", costoVarios : "", 
+     selectedFruta: null }) 
 
   useEffect(() => {
     reloadFrutas();

@@ -8,6 +8,11 @@ function FormFruta(props) {
   const descFruta = useRef("");
   const costoFruta = useRef("");
   const costoFlete = useRef("");
+  const costoBolsa = useRef("");
+  const costoEtiquetas = useRef("");
+  const costoCaja = useRef("");
+  const costoCinta = useRef("");
+  const costoVarios = useRef("");
 
   useEffect(() => {
    
@@ -18,7 +23,13 @@ function FormFruta(props) {
     descFruta.current.value = props.formularioData.descFruta
     costoFruta.current.value = props.formularioData.costoFruta
     costoFlete.current.value = props.formularioData.costoFlete
-    props.formularioData.selectedFruta = props.formularioData.selectedFruta
+    costoBolsa.current.value = props.formularioData.costoBolsa
+    costoEtiquetas.current.value = props.formularioData.costoEtiquetas
+    costoCaja.current.value = props.formularioData.costoCaja
+    costoCinta.current.value = props.formularioData.costoCinta
+    costoVarios.current.value = props.formularioData.costoVarios
+
+    //props.formularioData.selectedFruta = props.formularioData.selectedFruta
     
   }, [props.formularioData]);
     
@@ -28,6 +39,11 @@ function FormFruta(props) {
     nombre: "",
     costo: "0",
     flete: "0",
+    bolsa: "0",
+    etiquetas: "0",
+    caja: "0",
+    cinta: "0",
+    varios: "0",
   });
 
   const onChangeHandler = (event) => {
@@ -42,16 +58,25 @@ function FormFruta(props) {
     e.preventDefault();
     console.log("enviando...", formData);
     console.log('costoFruta.current.value', costoFruta.current.value);
+    console.log('costoBolsa.current.value', costoBolsa.current.value);
 
     const frutaInfo = {
       id: props.formularioData.selectedFruta,
       nombre: props.formularioData.selectedFruta == null ? formData.nombre : descFruta.current.value,
       costo: props.formularioData.selectedFruta == null ? formData.costo : costoFruta.current.value,
       flete: props.formularioData.selectedFruta == null ? formData.flete : costoFlete.current.value,
-      action: props.formularioData.selectedFruta == null ? "ADD" : "EDIT",
+
+      bolsa: props.formularioData.selectedFruta == null ? formData.bolsa : costoBolsa.current.value,
+      etiquetas: props.formularioData.selectedFruta == null ? formData.etiquetas : costoEtiquetas.current.value,
+      caja: props.formularioData.selectedFruta == null ? formData.caja : costoCaja.current.value,
+      cinta: props.formularioData.selectedFruta == null ? formData.cinta : costoCinta.current.value,
+      varios: props.formularioData.selectedFruta == null ? formData.varios : costoVarios.current.value,
+
+      action: props.formularioData.selectedFruta == null ? "ADD" : "EDIT"
     };
 
-    console.log('frutaInfo= ' + frutaInfo.action)
+    console.log('En realidad enviando frutaInfo= ', frutaInfo)
+    console.log('frutaInfo.action= ', frutaInfo.action)
     axios
       .post(URL, frutaInfo)
       .then((res) => {
@@ -80,21 +105,25 @@ function FormFruta(props) {
     descFruta.current.value = "";
     costoFruta.current.value = "";
     costoFlete.current.value = "";
+
+    costoBolsa.current.value = "";
+    costoEtiquetas.current.value = "";
+    costoCaja.current.value = "";
+    costoCinta.current.value = "";
+    costoVarios.current.value = "";
+
     props.formularioData.selectedFruta = null;
   };
 
   return (
     <div className="widget">
       <div className="panel panel-default">
-        <div
-          className="panel-heading"
-          style={{ backgroundColor: "#7280CF", fontWeight: "bold" }}
-        >
+        <div className="panel-heading" style={{backgroundColor: "#7280CF", fontWeight: "bold"}}>
           Informacion
         </div>
         <div className="panel-body">
           <form id="formulario" onSubmit={handleSubmit}>
-            <div className="row mb-3" style={{ paddingTop: "10px" }}>
+            <div className="row mb-3" style={{paddingTop: "10px"}}>
               <label htmlFor="descFruta" className="col-sm-2 col-form-label">
                 Fruta
               </label>
@@ -142,22 +171,96 @@ function FormFruta(props) {
                 />
               </div>
             </div>
+            <div className="row mb-3">
+              <label htmlFor="costoBolsa" className="col-sm-2 col-form-label">
+                Bolsa
+              </label>
+              <div className="col-sm-10">
+                <input
+                  type="number"
+                  className="form-control"
+                  ref={costoBolsa}
+                  id="costoBolsa"
+                  name="bolsa"
+                  onChange={onChangeHandler}
+                  defaultValue={props.formularioData.costoBolsa}
+                />
+              </div>
+            </div>
 
-            <Button
-              id="botonCancelar"
-              onClick={() => clearFormFields()}
-              className="btn btn-secondary"
-              style={{ float: "left" }}
-            >
+            <div className="row mb-3">
+              <label htmlFor="costoEtiquetas" className="col-sm-2 col-form-label">
+                Etiquetas
+              </label>
+              <div className="col-sm-10">
+                <input
+                  type="number"
+                  className="form-control"
+                  ref={costoEtiquetas}
+                  id="costoEtiquetas"
+                  name="etiquetas"
+                  onChange={onChangeHandler}
+                  defaultValue={props.formularioData.costoEtiquetas}
+                />
+              </div>
+            </div>
+
+            <div className="row mb-3">
+              <label htmlFor="costoCaja" className="col-sm-2 col-form-label">
+              Caja
+              </label>
+              <div className="col-sm-10">
+                <input
+                  type="number"
+                  className="form-control"
+                  ref={costoCaja}
+                  id="costoCaja"
+                  name="caja"
+                  onChange={onChangeHandler}
+                  defaultValue={props.formularioData.costoCaja}
+                />
+              </div>
+            </div>
+
+            <div className="row mb-3">
+              <label htmlFor="costoCinta" className="col-sm-2 col-form-label">
+              Cinta
+              </label>
+              <div className="col-sm-10">
+                <input
+                  type="number"
+                  className="form-control"
+                  ref={costoCinta}
+                  id="costoCinta"
+                  name="cinta"
+                  onChange={onChangeHandler}
+                  defaultValue={props.formularioData.costoCinta}
+                />
+              </div>
+            </div>                        
+
+            <div className="row mb-3">
+              <label htmlFor="costoVarios" className="col-sm-2 col-form-label">
+              Varios
+              </label>
+              <div className="col-sm-10">
+                <input
+                  type="number"
+                  className="form-control"
+                  ref={costoVarios}
+                  id="costoVarios"
+                  name="varios"
+                  onChange={onChangeHandler}
+                  defaultValue={props.formularioData.costoVarios}
+                />
+              </div>
+            </div>            
+
+            <Button id="botonCancelar" onClick={() => clearFormFields()} className="btn btn-secondary" style={{float: "left"}}>
               Cancelar
             </Button>
 
-            <Button
-              id="boton"
-              type="submit"
-              className="btn btn-primary"
-              style={{ float: "right" }}
-            >
+            <Button id="boton" type="submit" className="btn btn-primary" style={{float: "right"}}>
               Guardar
             </Button>
           </form>
